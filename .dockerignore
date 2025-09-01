@@ -1,0 +1,15 @@
+# Laravel files/folders to ignore
+/vendor
+/node_modules
+/storage/logs/*
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+
+# Docker ignore socket & DB data
+mysql_data
+*.sock
+
+# Git
+.git
+.gitignore

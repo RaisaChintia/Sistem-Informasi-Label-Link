@@ -1,0 +1,4 @@
+# Ignore MySQL data and socket
+mysql_data/
+*.sock
+node_modules
