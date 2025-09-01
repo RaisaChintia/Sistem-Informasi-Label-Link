@@ -5,17 +5,17 @@
     <title>Label Pasien</title>
     <style>
         @page { size: 50mm 30mm; margin: 0; }
-        body { margin:0; padding:0; font-family: Arial; font-size: 9pt; }
+        body { margin: 2.5rem; padding:0; font-family: Arial; font-size: 9pt; }
         .label {
-            width: 50mm;
-            height: 30mm;
+            width: 10rem;
+            height: 5rem;
             border:1px solid #000;
-            padding:2px;
+            padding:1px;
             box-sizing:border-box;
             display:flex;
             flex-direction:column;
-            justify-content:space-around;
-            padding-left: 1rem;
+            gap: 0.25rem;
+            padding-left: 0.5rem;
         }
         .nama {
             font-weight:bold; 
