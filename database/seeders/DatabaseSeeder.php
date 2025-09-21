@@ -11,15 +11,21 @@ class DatabaseSeeder extends Seeder
     {
         // ✅ Buat / update admin user (tidak akan duplicate)
         User::updateOrCreate(
-            ['email' => 'admin@gmail.com'], // kunci unik
+            ['username' => 'admin'], // ganti kunci unik ke username
             [
                 'name' => 'Admin User',
-                'password' => bcrypt('admin123'),
-                'email_verified_at' => now(),
+                'username' => 'admin', // <---- login pakai ini
+                'email' => 'admin@gmail.com', // opsional, boleh kosong
+                'password' => bcrypt('password123'),
             ]
         );
 
-        // ✅ Buat dummy users (kalau perlu)
-        User::factory(10)->create();
+        // ❌ Hapus atau perbaiki factory user
+        // User::factory(10)->create();
+
+        // ✅ Kalau mau tetap buat dummy user, pastikan factory punya username
+        // User::factory(10)->create([
+        //     'username' => fake()->userName(),
+        // ]);
     }
 }

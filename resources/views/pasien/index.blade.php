@@ -27,6 +27,7 @@
                 <thead class="table-primary">
                     <tr>
                         <th>#</th>
+                        <th>No. Registrasi</th>
                         <th>Nama</th>
                         <th>TTL</th>
                         <th>Jenis Kelamin</th>
@@ -37,8 +38,16 @@
                     @forelse ($pasien as $index => $p)
                     <tr>
                         <td>{{ ($pasien->currentPage() - 1) * $pasien->perPage() + $index + 1 }}</td>
+                        <td>{{ $p->no_registrasi }}</td>
                         <td>{{ $p->nama }}</td>
-                        <td>{{ $p->ttl }}</td>
+                        <td>
+                            @if($p->tempat_lahir && $p->tanggal_lahir)
+                                {{ $p->tempat_lahir }},
+                                {{ \Carbon\Carbon::parse($p->tanggal_lahir)->format('d-m-Y') }}
+                            @else
+                                <span class="text-muted">-</span>
+                            @endif
+                        </td>
                         <td>
                             @php $jk = strtolower($p->jenis_kelamin); @endphp
                             @if($jk == 'laki-laki' || $jk == 'l')
@@ -62,7 +71,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="5" class="text-center">Belum ada data pasien</td>
+                        <td colspan="6" class="text-center">Belum ada data pasien</td>
                     </tr>
                     @endforelse
                 </tbody>

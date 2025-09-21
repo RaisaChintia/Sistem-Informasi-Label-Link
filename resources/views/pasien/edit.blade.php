@@ -20,21 +20,34 @@
                 @csrf
                 @method('PUT')
 
+                <!-- ✅ No. Registrasi -->
                 <div class="mb-3">
-                    <label>Nama Pasien</label>
-                    <input type="text" name="nama" value="{{ $pasien->nama }}" class="form-control" required>
+                    <label>No. Registrasi</label>
+                    <input type="text" name="no_registrasi" value="{{ old('no_registrasi', $pasien->no_registrasi) }}" class="form-control" required>
                 </div>
 
                 <div class="mb-3">
-                    <label>Tempat/Tanggal Lahir</label>
-                    <input type="text" name="ttl" value="{{ $pasien->ttl }}" class="form-control" required>
+                    <label>Nama Pasien</label>
+                    <input type="text" name="nama" value="{{ old('nama', $pasien->nama) }}" class="form-control" required>
+                </div>
+
+                <!-- ✅ Tempat Lahir -->
+                <div class="mb-3">
+                    <label>Tempat Lahir</label>
+                    <input type="text" name="tempat_lahir" value="{{ old('tempat_lahir', $pasien->tempat_lahir) }}" class="form-control" required>
+                </div>
+
+                <!-- ✅ Tanggal Lahir -->
+                <div class="mb-3">
+                    <label>Tanggal Lahir</label>
+                    <input type="date" name="tanggal_lahir" value="{{ old('tanggal_lahir', $pasien->tanggal_lahir) }}" class="form-control" required>
                 </div>
 
                 <div class="mb-3">
                     <label>Jenis Kelamin</label>
                     <select name="jenis_kelamin" class="form-control" required>
-                        <option value="Laki-laki" {{ $pasien->jenis_kelamin == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
-                        <option value="Perempuan" {{ $pasien->jenis_kelamin == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                        <option value="Laki-laki" {{ old('jenis_kelamin', $pasien->jenis_kelamin) == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
+                        <option value="Perempuan" {{ old('jenis_kelamin', $pasien->jenis_kelamin) == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
                     </select>
                 </div>
 

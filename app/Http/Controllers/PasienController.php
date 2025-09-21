@@ -29,8 +29,10 @@ class PasienController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'no_registrasi' => 'required|unique:pasien,no_registrasi',
             'nama' => 'required',
-            'ttl' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required|date',
             'jenis_kelamin' => 'required',
         ]);
 
@@ -48,8 +50,10 @@ class PasienController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
+            'no_registrasi' => 'required|unique:pasien,no_registrasi,' . $id ?? '',
             'nama' => 'required',
-            'ttl' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required|date',
             'jenis_kelamin' => 'required',
         ]);
 

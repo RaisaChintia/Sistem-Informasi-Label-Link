@@ -12,8 +12,10 @@ class Pasien extends Model
     protected $table = 'pasien'; // Nama tabel di database
 
     protected $fillable = [
+        'no_registrasi',
         'nama',
-        'ttl',
+        'tempat_lahir',   // ✅ baru
+        'tanggal_lahir',  // ✅ baru
         'jenis_kelamin',
     ];
 

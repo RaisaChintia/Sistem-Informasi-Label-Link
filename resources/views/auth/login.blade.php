@@ -24,8 +24,8 @@
 
         <form method="POST" action="{{ url('/login') }}">
             @csrf
-            <label>Email:</label>
-            <input type="email" name="email" placeholder="Masukkan email" required>
+            <label>Username:</label>
+            <input type="text" name="username" placeholder="Masukkan username" required>
 
             <label>Password:</label>
             <input type="password" name="password" placeholder="Masukkan password" required>
