@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pasien;
+use Carbon\Carbon;
 
 class PasienController extends Controller
 {
@@ -16,7 +17,12 @@ class PasienController extends Controller
             $query->where('nama', 'like', "%{$search}%");
         }
 
-        $pasien = $query->orderBy('nama')->paginate(10)->withQueryString();
+        // ✅ Urutkan berdasarkan no_registrasi terbaru (desc)
+        // Jika no_registrasi varchar, gunakan CAST agar urutan angka benar
+        $pasien = $query->orderBy('id', 'desc')
+                        //->orderByRaw('CAST(no_registrasi AS UNSIGNED) DESC')
+                        ->paginate(10)
+                        ->withQueryString();
 
         return view('pasien.index', compact('pasien'));
     }
@@ -50,7 +56,8 @@ class PasienController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'no_registrasi' => 'required|unique:pasien,no_registrasi,' . $id ?? '',
+            // ✅ perbaikan validasi unique agar aman saat update
+            'no_registrasi' => 'required|unique:pasien,no_registrasi,' . $id,
             'nama' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required|date',
@@ -75,6 +82,12 @@ class PasienController extends Controller
     public function label($id)
     {
         $pasien = Pasien::findOrFail($id);
-        return view('pasien.label', compact('pasien'));
+
+        // ✅ Hitung usia langsung di controller
+        $tglLahir = Carbon::parse($pasien->tanggal_lahir);
+        $usiaObj = $tglLahir->diff(Carbon::now());
+        $usia = $usiaObj->y . ' Th ' . $usiaObj->m . ' bln ' . $usiaObj->d . ' hr';
+
+        return view('pasien.label', compact('pasien', 'usia'));
     }
 }
